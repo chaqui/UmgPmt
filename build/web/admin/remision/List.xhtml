@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListRemisionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListRemisionEmpty}" rendered="#{remisionController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{remisionController.items.rowCount > 0}">
+                    <h:outputText value="#{remisionController.pagination.pageFirstItem + 1}..#{remisionController.pagination.pageLastItem + 1}/#{remisionController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{remisionController.previous}" value="#{bundle.Previous} #{remisionController.pagination.pageSize}" rendered="#{remisionController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{remisionController.next}" value="#{bundle.Next} #{remisionController.pagination.pageSize}" rendered="#{remisionController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{remisionController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_noRemision}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noRemision}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_tipoPlaca}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoPlaca}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_noPlaca}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noPlaca}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_noDeTarjetaDeCirculacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noDeTarjetaDeCirculacion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_tipo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_color}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.color}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_marcar}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.marcar}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_nombresDelInfractori}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombresDelInfractori}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_apellidosDelInfractor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apellidosDelInfractor}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_dirreccion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dirreccion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_noDeRegistro}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noDeRegistro}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_licenciaNo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.licenciaNo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_clasificacionDeLicencia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.clasificacionDeLicencia}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_lugardelaInfraccion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lugardelaInfraccion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_hora}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hora}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_valorInfraccion1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.valorInfraccion1}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_infraccion1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.infraccion1}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_infraccion2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.infraccion2}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_valorInfraccion2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.valorInfraccion2}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_infraccion3}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.infraccion3}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_valorinfraccion3}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.valorinfraccion3}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_fundamentosDeLey}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fundamentosDeLey}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_noDeChapadelPolicia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noDeChapadelPolicia}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_delegacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.delegacion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemisionTitle_observaciones}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.observaciones}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{remisionController.prepareView}" value="#{bundle.ListRemisionViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{remisionController.prepareEdit}" value="#{bundle.ListRemisionEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{remisionController.destroy}" value="#{bundle.ListRemisionDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{remisionController.prepareCreate}" value="#{bundle.ListRemisionCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListRemisionIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

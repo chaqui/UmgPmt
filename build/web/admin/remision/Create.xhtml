@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h1>Crear una nueva remision</h1>
+        </ui:define>
+        <ui:define name="body">
+           <p:panel>
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>  
+                <p:messages/>
+                <p:tabView effect="fade" effectDuration="fast">
+                    <p:tab title="informacion principal del veh. y rem.">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_noRemision}" for="noRemision" />
+                    <h:inputText id="noRemision" value="#{remisionController.selected.noRemision}" title="#{bundle.CreateRemisionTitle_noRemision}" required="true" requiredMessage="#{bundle.CreateRemisionRequiredMessage_noRemision}"/>
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_tipoPlaca}" for="tipoPlaca" />
+                     <h:selectOneMenu id="tipoPlaca" value="#{remisionController.selected.tipoPlaca}">
+                        <f:selectItem itemLabel="" itemValue=""/>
+                        <f:selectItem itemLabel="P" itemValue="P"/>
+                        <f:selectItem itemLabel="C" itemValue="C"/>
+                        <f:selectItem itemLabel="M" itemValue="M"/>
+                    </h:selectOneMenu>                    <h:outputLabel value="#{bundle.CreateRemisionLabel_noPlaca}" for="noPlaca" />
+                    <h:inputText id="noPlaca" value="#{remisionController.selected.noPlaca}" title="#{bundle.CreateRemisionTitle_noPlaca}" />
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_noDeTarjetaDeCirculacion}" for="noDeTarjetaDeCirculacion" />
+                    <h:inputText id="noDeTarjetaDeCirculacion" value="#{remisionController.selected.noDeTarjetaDeCirculacion}" title="#{bundle.CreateRemisionTitle_noDeTarjetaDeCirculacion}" />
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_tipo}" for="tipo" />
+                    <h:inputText id="tipo" value="#{remisionController.selected.tipo}" title="#{bundle.CreateRemisionTitle_tipo}" />
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_color}" for="color" />
+                    <h:inputText id="color" value="#{remisionController.selected.color}" title="#{bundle.CreateRemisionTitle_color}" />
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_marcar}" for="marcar" />
+                    <h:inputText id="marcar" value="#{remisionController.selected.marcar}" title="#{bundle.CreateRemisionTitle_marcar}" />
+                     </h:panelGrid>
+                    </p:tab>
+                     <p:tab title="Datos del infractor">
+                        <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_nombresDelInfractori}" for="nombresDelInfractori" />
+                    <h:inputText id="nombresDelInfractori" value="#{remisionController.selected.nombresDelInfractori}" title="#{bundle.CreateRemisionTitle_nombresDelInfractori}" />
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_apellidosDelInfractor}" for="apellidosDelInfractor" />
+                    <h:inputText id="apellidosDelInfractor" value="#{remisionController.selected.apellidosDelInfractor}" title="#{bundle.CreateRemisionTitle_apellidosDelInfractor}" />
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_dirreccion}" for="dirreccion" />
+                    <h:inputText id="dirreccion" value="#{remisionController.selected.dirreccion}" title="#{bundle.CreateRemisionTitle_dirreccion}" />
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_noDeRegistro}" for="noDeRegistro" />
+                    <h:inputText id="noDeRegistro" value="#{remisionController.selected.noDeRegistro}" title="#{bundle.CreateRemisionTitle_noDeRegistro}" />
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_licenciaNo}" for="licenciaNo" />
+                    <h:inputText id="licenciaNo" value="#{remisionController.selected.licenciaNo}" title="#{bundle.CreateRemisionTitle_licenciaNo}" />
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_clasificacionDeLicencia}" for="clasificacionDeLicencia" />
+                    <h:inputText id="clasificacionDeLicencia" value="#{remisionController.selected.clasificacionDeLicencia}" title="#{bundle.CreateRemisionTitle_clasificacionDeLicencia}" />
+                      </h:panelGrid>
+                    </p:tab>
+                 <p:tab title="Datos de a infraccion">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_lugardelaInfraccion}" for="lugardelaInfraccion" />
+                    <h:inputText id="lugardelaInfraccion" value="#{remisionController.selected.lugardelaInfraccion}" title="#{bundle.CreateRemisionTitle_lugardelaInfraccion}" />
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_hora}" for="hora" />
+                    <h:inputText id="hora" value="#{remisionController.selected.hora}" title="#{bundle.CreateRemisionTitle_hora}" >
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_fecha}" for="fecha" />
+                    <p:calendar value="#{remisionController.selected.fecha}" id="fecha" navigator="true "/>
+                    </h:panelGrid>
+                    <p:tabView effect="fade" effectDuration="fast">
+                        <p:tab title="Infraccion 1">
+                    <h:outputLabel value="Razon: " for="infraccion1" />
+                    <h:inputText id="infraccion1" value="#{remisionController.selected.infraccion1}" title="#{bundle.CreateRemisionTitle_infraccion1}" />
+                    <h:outputLabel value="Valor: " for="valorInfraccion1" />
+                    <h:inputText id="valorInfraccion1" value="#{remisionController.selected.valorInfraccion1}" title="#{bundle.EditRemisionTitle_valorInfraccion1}" />
+                        </p:tab>
+                        <p:tab title="Infraccion 2">
+                    <h:outputLabel value="Razon: " for="infraccion2" />
+                    <h:inputText id="infraccion2" value="#{remisionController.selected.infraccion2}" title="#{bundle.CreateRemisionTitle_infraccion2}" />
+                    <h:outputLabel value="Valor: " for="valorInfraccion2" />
+                    <h:inputText id="valorInfraccion2" value="#{remisionController.selected.valorInfraccion2}" title="#{bundle.CreateRemisionTitle_valorInfraccion2}" />
+                    </p:tab>
+                        <p:tab title="Infraccion 3">
+                    <h:outputLabel value="Razon :" for="infraccion3" />
+                    <h:inputText id="infraccion3" value="#{remisionController.selected.infraccion3}" title="#{bundle.CreateRemisionTitle_infraccion3}" />
+                    <h:outputLabel value="Valor :" for="valorinfraccion3" />
+                    <h:inputText id="valorinfraccion3" value="#{remisionController.selected.valorinfraccion3}" title="#{bundle.CreateRemisionTitle_valorinfraccion3}" />
+                        </p:tab>
+                    </p:tabView>
+                     <h:outputLabel value="Fundamentos de Ley:" for="fundamentosDeLey" /> <br/>
+                    <h:inputTextarea rows="4" cols="30" id="fundamentosDeLey" value="#{remisionController.selected.fundamentosDeLey}" title="#{bundle.CreateRemisionTitle_fundamentosDeLey}" />
+                     
+                 </p:tab >
+                 <p:tab title="datos del policia">
+                    <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_noDeChapadelPolicia}" for="noDeChapadelPolicia" />
+                    <h:inputText id="noDeChapadelPolicia" value="#{remisionController.selected.noDeChapadelPolicia}" title="#{bundle.CreateRemisionTitle_noDeChapadelPolicia}" />
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_delegacion}" for="delegacion" />
+                    <h:inputText id="delegacion" value="#{remisionController.selected.delegacion}" title="#{bundle.CreateRemisionTitle_delegacion}" />
+                     </h:panelGrid>
+                 </p:tab >
+                 <p:tab title="Observaciones y Guardar">
+                    <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRemisionLabel_observaciones}" for="observaciones" />
+                    <h:inputTextarea rows="4" cols="30" id="observaciones" value="#{remisionController.selected.observaciones}" title="#{bundle.CreateRemisionTitle_observaciones}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{remisionController.create}" value="#{bundle.CreateRemisionSaveLink}" />
+                <br />
+                 </p:tab>
+                    </p:tabView>
+                <br />
+                <h:commandLink action="#{remisionController.prepareList}" value="#{bundle.CreateRemisionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateRemisionIndexLink}"/>
+            </h:form>
+               </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>
