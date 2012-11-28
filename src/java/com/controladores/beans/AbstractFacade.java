@@ -35,7 +35,10 @@ public abstract class AbstractFacade<T> {
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
     }
-
+    public T findplaca(Object placa)
+    {
+        return getEntityManager().find(entityClass, placa);
+    }
     public List<T> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));

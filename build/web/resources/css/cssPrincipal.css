@@ -13,7 +13,7 @@ body{
     background: greenyellow;
     font-size: 16px;
     padding: 0;
-    font-family: verdana;
+    font-family: 'Sanchez', serif;
 }
 h1{
     display: block;
@@ -90,4 +90,9 @@ a{
 #contenido a:hover{
           box-shadow: 5px 5px 15px #cccccc;
           color:#ccc000;
+}
+h1:hover{
+        -webkit-transform: rotateZ(-5deg);
+    -moz-transform: rotateZ(-5deg);
+    -o-transform: rotateZ(-5deg);
 }
