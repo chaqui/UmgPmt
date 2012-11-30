@@ -9,6 +9,9 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css"  href="/resources/css/cssPrincipal.css">
+         <link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'/>
+        <link type="text/css" rel="stylesheet" 
+		  href="/JavaServerFaces/faces/javax.faces.resource/css/cssPrincipal.css?ln=css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
     </head>

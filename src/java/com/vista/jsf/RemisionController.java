@@ -22,7 +22,7 @@ import javax.faces.model.SelectItem;
 @SessionScoped
 public class RemisionController implements Serializable {
 
-    private Remision current;
+    public Remision current;
     private DataModel items = null;
     @EJB
     private com.controladores.beans.RemisionFacade ejbFacade;

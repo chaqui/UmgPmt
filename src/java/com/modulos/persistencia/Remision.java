@@ -76,7 +76,7 @@ public class Remision implements Serializable {
     @Size(max = 45)
     @Column(name = "Marcar")
     private String marcar;
-    @Size(max = 45)
+//    @Size(max = 45)
     @Column(name = "Nombres_Del_Infractori")
     private String nombresDelInfractori;
     @Size(max = 45)
