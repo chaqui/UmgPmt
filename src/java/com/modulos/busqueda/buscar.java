@@ -12,18 +12,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.modulos.busqueda.Busqueda;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import com.modulos.busqueda.BusquedaPorMySql;
 /**
  *
  * @author chaqui
  */
 @WebServlet(name = "buscar", urlPatterns = {"/buscar"})
 public class buscar extends HttpServlet {
+    private String tipo;
     @PersistenceContext(unitName = "PmtUmgPU")
     private EntityManager em;
     @Resource
@@ -44,17 +47,41 @@ public class buscar extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Busqueda buscar = new Busqueda();
+        LinkedList lista = new LinkedList();
         PrintWriter out = response.getWriter();
-        List lista= buscar.findByNoPlaca(request.getParameter("numero"));
+        try{
+             BusquedaPorMySql busquedaSql = new BusquedaPorMySql();
+          
+        String numero =(String) request.getParameter("numero");
+        tipo = (String) request.getParameter("tipo");
+        System.out.println(numero);
+        String query="SELECT * FROM Remision WHERE NoPlaca = \""+numero+"\"";
+        System.out.println(query);
+        
+        try{
+           lista = busquedaSql.consulta(query);
+          
+        }
+        catch(Exception e)
+        {
+            System.out.println("error en la consulta");
+             lista=null;
+        }
+        }
+        catch(Exception e)
+                {
+                    System.out.println("error al crear ael objeto");
+                }
+     
         try {
         if (lista==null) {
                         out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet buscar</title>");
-            out.println(" <link rel=\"stylesheet\" type=\"text/css\"  href=\"/resources/css/cssPrincipal.css\">");
+            out.println(" <link rel=\"stylesheet\" type=\"text/css\"  href=\"resources/css/cssPrincipal.css\">");
             out.println(" <link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'/>");
             out.println("</head>");
-            out.println("<body>");
+            out.println("<body style=\"    background: greenyellow; font-size: 16px; padding: 0; font-family: 'Sanchez', serif;\">");
             out.println(" <div id=\"menu\">\n" +
 "            <a href=\"index.xhtml\">Inicio</a>\n" +
 "            <a href=\"busqueda.jsp\">Buscar</a>\n" +
@@ -67,7 +94,7 @@ public class buscar extends HttpServlet {
 "                <div id=\"pmt\">Policia Municipal de Transito</div>\n" +
 "            </div>\n" +
 "            <div id=\"contenido\">");
-            out.println("<h1> " +"no se encontro ninguno" + "</h1>");
+            out.println("<h1> " +"no se tiene multas" + "</h1>");
             out.println(" </div>\n" +
 "            <div id=\"pie\">\n" +
 "                umg <br/>\n" +
@@ -81,11 +108,14 @@ public class buscar extends HttpServlet {
         }
 
         else{
+            int q= lista.size()/25;
+            System.out.println(q);
+       
             /* TODO output your page here. You may use following sample code. */
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet buscar</title>");
-            out.println(" <link rel=\"stylesheet\" type=\"text/css\"  href=\"/resources/css/cssPrincipal.css\">");
+            out.println(" <link rel=\"stylesheet\" type=\"text/css\"  href=\"resources/css/cssPrincipal.css\">");
             out.println(" <link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'/>");
             out.println("</head>");
             out.println("<body>");
@@ -101,7 +131,58 @@ public class buscar extends HttpServlet {
 "                <div id=\"pmt\">Policia Municipal de Transito</div>\n" +
 "            </div>\n" +
 "            <div id=\"contenido\">");
-          out.println("<p>valor encontrado</p>");
+          out.print("<table>");
+          double total=0;
+          int m=0;
+          boolean b=false;
+            for (int i = 0; i < q; i++) {
+                int r= 25*i;
+                System.out.println(r);
+                System.out.println(lista.get(r+1).toString()+ " "+tipo);
+                if ((tipo.compareTo(lista.get(r+1).toString()))==0) {
+                    m=m+1;
+                    out.print("<tr>");
+                    out.print("<td> multa "+String.valueOf(m) +"</td>");
+                    out.print("</tr>");
+                    out.print("<tr>");
+                    System.out.println(lista.get(r+16)+"hola");
+                    if (lista.get(r+17)!=null) {
+                        out.println("<td> "+String.valueOf(lista.get(r+17)) +"</td>");
+                        out.println("<td>"+String.valueOf(lista.get(r+16)) +"</td>");
+                        total=total+Double.valueOf(lista.get(r+16).toString());
+                    }
+                    out.println("</tr>");
+                    out.print("<tr>");
+                    if (lista.get(r+18)!=null) {
+                        out.println("<td> "+String.valueOf(lista.get(r+18)) +"</td>");
+                        out.println("<td>"+String.valueOf(lista.get(r+19)) +"</td>");
+                        total=total+Double.valueOf(lista.get(r+19).toString());
+                    }
+                    out.println("</tr>");
+                     out.print("<tr>");
+                    if (lista.get(r+20)!=null) {
+                        out.println("<td> "+String.valueOf(lista.get(r+20)) +"</td>");
+                        out.println("<td>"+String.valueOf(lista.get(r+21)) +"/td>");
+                        total=total+Double.valueOf(lista.get(r+21).toString());
+                    }
+                    out.println("</tr>");
+                    b=true;
+                }
+                else{
+                    out.println("<tr><td>No tiene multas</td></tr>");
+                }
+            }
+            if (b) {
+                 out.print("<tr>");
+                        out.println("<td> total:</td>");
+                        out.println("<td>"+String.valueOf(total) +"</td>");
+                        out.println("</tr>");
+            }
+                 
+            
+                    
+                    
+            out.print("</table>");
             out.println(" </div>\n" +
 "            <div id=\"pie\">\n" +
 "                umg <br/>\n" +
@@ -157,7 +238,6 @@ public class buscar extends HttpServlet {
             out.println("<title>Servlet buscar</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet buscar at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {            
