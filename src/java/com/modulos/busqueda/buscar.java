@@ -46,6 +46,7 @@ public class buscar extends HttpServlet {
         Busqueda buscar = new Busqueda();
         PrintWriter out = response.getWriter();
         List lista= buscar.findByNoPlaca(request.getParameter("numero"));
+        try {
         if (lista==null) {
                         out.println("<html>");
             out.println("<head>");
@@ -66,7 +67,7 @@ public class buscar extends HttpServlet {
 "                <div id=\"pmt\">Policia Municipal de Transito</div>\n" +
 "            </div>\n" +
 "            <div id=\"contenido\">");
-            out.println("<h1>Servlet buscar at " +"no se encontro ninguno" + "</h1>");
+            out.println("<h1> " +"no se encontro ninguno" + "</h1>");
             out.println(" </div>\n" +
 "            <div id=\"pie\">\n" +
 "                umg <br/>\n" +
@@ -79,7 +80,7 @@ public class buscar extends HttpServlet {
             out.println("</html>");
         }
 
-        try {
+        else{
             /* TODO output your page here. You may use following sample code. */
             out.println("<html>");
             out.println("<head>");
@@ -111,6 +112,7 @@ public class buscar extends HttpServlet {
 "        </div>");
             out.println("</body>");
             out.println("</html>");
+        }
         } finally {            
             out.close();
         }
