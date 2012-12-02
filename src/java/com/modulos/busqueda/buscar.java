@@ -116,6 +116,17 @@ public class buscar extends HttpServlet {
             out.println("<head>");
             out.println("<title>Servlet buscar</title>");
             out.println(" <link rel=\"stylesheet\" type=\"text/css\"  href=\"resources/css/cssPrincipal.css\">");
+            out.println(" <script type=\"text/JavaScript\" src=\"http://code.jquery.com/jquery-1.8.3.min.js\"></script>");
+            out.println("<script type=\"text/JavaScript\">");
+            out.print("	$(document).on('ready',function()\n" +
+"		{ $(\"#impreso\").click(fuction(e){\n" +
+"                   $(\"#menu\").css(\"opacity\",\"0%\");\n" +
+"                   $(\"#body\").css(\"background-color\",\"#ffffff\");\n" +
+"                   window.print();\n" +
+"                });\n" +
+"                });\n" +
+"");
+            out.println("</script>");
             out.println(" <link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'/>");
             out.println("</head>");
             out.println("<body>");
@@ -131,16 +142,27 @@ public class buscar extends HttpServlet {
 "                <div id=\"pmt\">Policia Municipal de Transito</div>\n" +
 "            </div>\n" +
 "            <div id=\"contenido\">");
+            
           out.print("<table>");
           double total=0;
           int m=0;
-          boolean b=false;
+          boolean b=false,c=true;
             for (int i = 0; i < q; i++) {
                 int r= 25*i;
-                System.out.println(r);
-                System.out.println(lista.get(r+1).toString()+ " "+tipo);
                 if ((tipo.compareTo(lista.get(r+1).toString()))==0) {
+                    System.out.println("ifs");
                     m=m+1;
+                    if (c) {
+                        out.print("<tr>");
+                        out.print("<td>");
+                        out.print("nombre:");
+                        out.print("</td>");
+                        out.print("<td>");
+                        out.print(lista.get(r+7)+" "+lista.get(r+8));
+                        out.print("</td>");
+                        
+                        c=false;
+                    }
                     out.print("<tr>");
                     out.print("<td> multa "+String.valueOf(m) +"</td>");
                     out.print("</tr>");
@@ -177,12 +199,9 @@ public class buscar extends HttpServlet {
                         out.println("<td> total:</td>");
                         out.println("<td>"+String.valueOf(total) +"</td>");
                         out.println("</tr>");
-            }
-                 
-            
-                    
-                    
+            }                   
             out.print("</table>");
+            out.println("<input type=\"submit\"  id=\"impreso\"value=\"imprimir\">");
             out.println(" </div>\n" +
 "            <div id=\"pie\">\n" +
 "                umg <br/>\n" +

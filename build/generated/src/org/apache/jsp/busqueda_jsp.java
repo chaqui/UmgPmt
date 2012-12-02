@@ -48,8 +48,7 @@ public final class busqueda_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("         <link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'/>\n");
-      out.write("   <link rel=\"stylesheet\" type=\"text/css\"  href=\"/resources/css/cssPrincipal.css\">\n");
+      out.write("   <link rel=\"stylesheet\" type=\"text/css\"  href=\"resources/css/cssPrincipal.css\">\n");
       out.write("        <title>Busqueda</title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
@@ -80,7 +79,7 @@ public final class busqueda_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("               \n");
       out.write("                </tr>\n");
       out.write("            </table>\n");
-      out.write("            <input type=\"SUBMIT\" value=\"enviar\">\n");
+      out.write("            <input type=\"SUBMIT\" value=\"buscar\">\n");
       out.write("                \n");
       out.write("        </form>\n");
       out.write("        </div>\n");

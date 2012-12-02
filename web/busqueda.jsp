@@ -40,7 +40,7 @@
                
                 </tr>
             </table>
-            <input type="SUBMIT" value="enviar">
+            <input type="SUBMIT" value="buscar">
                 
         </form>
         </div>

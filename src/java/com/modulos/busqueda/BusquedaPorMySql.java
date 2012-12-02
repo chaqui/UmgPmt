@@ -3,11 +3,9 @@
  * and open the template in the editor.
  */
 package com.modulos.busqueda;
-import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.Static;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.LinkedList;
