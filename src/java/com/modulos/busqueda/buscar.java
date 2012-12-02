@@ -158,10 +158,14 @@ public class buscar extends HttpServlet {
                         out.print("nombre:");
                         out.print("</td>");
                         out.print("<td>");
-                        out.print(lista.get(r+7)+" "+lista.get(r+8));
+                        if (lista.get(r+7)!=null) {
+                            out.print(lista.get(r+7)+" "+lista.get(r+8));
+                                                    
                         out.print("</td>");
                         
                         c=false;
+                        }
+
                     }
                     out.print("<tr>");
                     out.print("<td> multa "+String.valueOf(m) +"</td>");
@@ -169,23 +173,49 @@ public class buscar extends HttpServlet {
                     out.print("<tr>");
                     System.out.println(lista.get(r+16)+"hola");
                     if (lista.get(r+17)!=null) {
-                        out.println("<td> "+String.valueOf(lista.get(r+17)) +"</td>");
-                        out.println("<td>"+String.valueOf(lista.get(r+16)) +"</td>");
-                        total=total+Double.valueOf(lista.get(r+16).toString());
+                        if (lista.get(r+17)!=null) {
+                            out.println("<td> "+String.valueOf(lista.get(r+17)) +"</td>");
+                        if (lista.get(r+16)!=null) {
+                            out.println("<td>"+String.valueOf(lista.get(r+16)) +"</td>");
+                            total=total+Double.valueOf(lista.get(r+16).toString());
+                        }
+                        else
+                        {
+                         out.println("<td>"+"0.00" +"</td>");   
+                        }
+                        
+                    }
                     }
                     out.println("</tr>");
                     out.print("<tr>");
                     if (lista.get(r+18)!=null) {
-                        out.println("<td> "+String.valueOf(lista.get(r+18)) +"</td>");
-                        out.println("<td>"+String.valueOf(lista.get(r+19)) +"</td>");
-                        total=total+Double.valueOf(lista.get(r+19).toString());
+                        if (lista.get(r+18)!=null) {
+                            out.println("<td> "+String.valueOf(lista.get(r+18)) +"</td>");
+                        }
+                        if ((lista.get(r+19))!=null) {
+                            out.println("<td>"+String.valueOf(lista.get(r+19)) +"</td>");
+                            total=total+Double.valueOf(lista.get(r+19).toString());
+                        }
+                        else
+                        {
+                             out.println("<td>"+"0.00" +"</td>");
+                        }
+                       
+                        
                     }
                     out.println("</tr>");
                      out.print("<tr>");
                     if (lista.get(r+20)!=null) {
                         out.println("<td> "+String.valueOf(lista.get(r+20)) +"</td>");
-                        out.println("<td>"+String.valueOf(lista.get(r+21)) +"/td>");
-                        total=total+Double.valueOf(lista.get(r+21).toString());
+                        if (lista.get(r+21)!=null) {
+                               out.println("<td>"+String.valueOf(lista.get(r+21)) +"/td>");
+                               total=total+Double.valueOf(lista.get(r+21).toString());
+                        }
+                         else
+                        {
+                             out.println("<td>"+"0.00" +"</td>");
+                        }
+                        
                     }
                     out.println("</tr>");
                     b=true;
